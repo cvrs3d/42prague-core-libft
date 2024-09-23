@@ -6,42 +6,79 @@
 #    By: yustinov <ev.ustinov03@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 14:22:17 by yustinov          #+#    #+#              #
-#    Updated: 2024/09/20 16:36:07 by yustinov         ###   ########.fr        #
+#    Updated: 2024/09/23 10:39:10 by yustinov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+NAME	= libft.a
+SRC		= ft_isalpha.c\
+		ft_toupper.c\
+		ft_isdigit.c\
+		ft_tolower.c\
+		ft_isalnum.c\
+		ft_strchr.c\
+		ft_isascii.c\
+		ft_strrchr.c\
+		ft_isprint.c\
+		ft_strncmp.c\
+		ft_strlen.c\
+		ft_memchr.c\
+		ft_memset.c\
+		ft_bzero.c\
+		ft_memcpy.c\
+		ft_memcmp.c\
+		ft_memmove.c\
+		ft_strnstr.c\
+		ft_strlcpy.c\
+		ft_atoi.c\
+		ft_strlcat.c\
+		ft_calloc.c\
+		ft_strdup.c\
+		ft_substr.c\
+		ft_strjoin.c\
+		ft_strtrim.c\
+		ft_split.c\
+		ft_itoa.c\
+		ft_strmapi.c\
+		ft_striteri.c\
+		ft_putchar_fd.c\
+		ft_putstr_fd.c\
+		ft_putendl_fd.c\
+		ft_putnbr_fd.c
+BSRC	= ft_lstnew_bonus.c\
+		ft_lstadd_front_bonus.c\
+		ft_lstsize_bonus.c\
+		ft_lstlast_bonus.c\
+		ft_lstadd_back_bonus.c\
+		ft_lstdelone_bonus.c\
+		ft_lstclear_bonus.c\
+		ft_lstiter_bonus.c\
+		ft_lstmap_bonus.c
+OBJ		= $(SRC:.c=.o)
+BOBJ	= $(BSRC:.c=.o)
+INCS	= libft.h
+LIBC	= ar rcs
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror #-fPIC
 
-REGULAR_SRCS = $(filter-out %_bonus.c, $(wildcard ft_*.c))
-BONUS_SRCS = $(wildcard *_bonus.c)
+all: $(NAME)
 
-REGULAR_OBJS = $(REGULAR_SRCS:.c=.o)
-BONUS_OBJS = $(BONUS_SRCS:.c=.o)
-
-NAME = libft.a
-
-all: $(NAME) bonus
-
-$(NAME): $(REGULAR_OBJS)
-	$(AR) rcs $@ $^
-
-%.o: %.c
+%.o: %.c $(INCS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(BONUS_OBJS)
-	$(AR) rcs $(NAME) $(BONUS_OBJS)
+$(NAME): $(OBJ)
+	$(LIBC) $(NAME) $(OBJ)
+
+bonus: $(OBJ) $(BOBJ)
+	$(LIBC) $(NAME) $(OBJ) $(BOBJ)
 
 clean:
-	rm -f $(REGULAR_OBJS) $(BONUS_OBJS)
+	rm -f $(OBJ) $(BOBJ)
+#	rm -f *.so
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-test: fclean all clean
-	$(CC) ft_test_all.c libft.a
-	./a.out
 
 .PHONY: all clean fclean re bonus
