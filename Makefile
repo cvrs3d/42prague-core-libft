@@ -6,7 +6,7 @@
 #    By: yustinov <ev.ustinov03@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 14:22:17 by yustinov          #+#    #+#              #
-#    Updated: 2024/09/23 10:39:10 by yustinov         ###   ########.fr        #
+#    Updated: 2024/09/23 14:04:24 by yustinov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ BOBJ	= $(BSRC:.c=.o)
 INCS	= libft.h
 LIBC	= ar rcs
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror #-fPIC
+CFLAGS	= -Wall -Wextra -Werror
 
 all: $(NAME)
 
@@ -74,11 +74,13 @@ bonus: $(OBJ) $(BOBJ)
 
 clean:
 	rm -f $(OBJ) $(BOBJ)
-#	rm -f *.so
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+function: 
+	$(CC) $(CFLAGS) $(funcname) $(NAME)
 
 .PHONY: all clean fclean re bonus

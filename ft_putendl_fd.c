@@ -6,7 +6,7 @@
 /*   By: yustinov <ev.ustinov03@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:10:48 by yustinov          #+#    #+#             */
-/*   Updated: 2024/09/20 17:14:21 by yustinov         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:43:09 by yustinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	unsigned int	i;
-
-	i = 0;
 	if (!s)
-		write (fd, "(null)", 6);
-	while (s[i])
 	{
-		write (fd, &s[i], 1);
+		write (fd, "(null)\n", 7);
+		return ;
+	}
+	while (*s != '\0')
+	{
+		write (fd, s, 1);
 		s++;
 	}
 	write (fd, "\n", 1);
@@ -32,7 +32,7 @@ void	ft_putendl_fd(char *s, int fd)
 int main(void)
 {
     // Write to standard output
-    ft_putendl_fd("Hello, World!", STDOUT_FILENO);
+    ft_putendl_fd(NULL, STDOUT_FILENO);
 
     // Write to a file
     int fd = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
