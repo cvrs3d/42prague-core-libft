@@ -9,7 +9,9 @@
 # Manual
 
 ```git clone "repository URL"```
+
 ```make all```
+
 ```make bonus```
 
 ```make function funcname="yourfilename.c"```
